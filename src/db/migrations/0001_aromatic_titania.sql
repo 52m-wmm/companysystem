@@ -1,0 +1,1 @@
+ALTER TABLE "customers" ADD COLUMN "last_name" varchar NOT NULL;
