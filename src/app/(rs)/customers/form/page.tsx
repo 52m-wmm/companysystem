@@ -1,7 +1,9 @@
+
 import { getCustomer } from "@/lib/queries/getCustomer";
 import  { BackButton } from "@/components/BackButton";
 import { CustomerForm } from "./CustomerForm";
 import { CustomErrorParams } from "zod/v3";
+import { InputWithLabel } from "@/components/inputs/InputWithLabel";
 export default async function CustomerFormPage({
     searchParams,
 }: {
@@ -32,7 +34,7 @@ export default async function CustomerFormPage({
 
 
     }catch (e) {
-        if (e instanceof Error) {//检查捕获到的对象是否真的是一个错误对象
+        if (e instanceof Error) {
             throw e
         }
     }

@@ -5,7 +5,7 @@ export default function LoginPage() {
   return (
     <main className="h-dvh flex flex-col items-center gap-6
     text-4xl p-4">
-        <h1>Company System</h1>
+        <h1>Company Ticket System</h1>
       <Button asChild>
         <LoginLink>Login</LoginLink>
       </Button>     
