@@ -2,6 +2,8 @@ import { getCustomer } from "@/lib/queries/getCustomer";
 import { getTickets } from "@/lib/queries/Ticket";
 import { BackButton } from "@/components/BackButton";
 import TicketForm from "@/app/(rs)/tickets/form/TicketForm";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import {Users, init as kindeInit} from "@kinde/management-api-js";
 
 export default async function TicketFormPage({
   searchParams,
@@ -21,6 +23,14 @@ export default async function TicketFormPage({
         </>
       );
     }
+
+    const { getPermission, getUser } = getKindeServerSession();
+    const [managerPermission, user] = await Promise.all([
+      getPermission("manager"),
+      getUser() 
+    ]);   
+
+    const isManager = managerPermission?.isGranted ?? false;
 
     // New ticket form
     if (customerId) {
@@ -45,10 +55,18 @@ export default async function TicketFormPage({
           </>
         );
       }
+      //return ticket form
+      if (!isManager) {
+        kindeInit()
+        const { users }= await Users.getUsers()
+        const techs = users ? users.map(user => ({ id: user.id, email!: user.email, description: user.email! })) : []
 
-      // ✅ 新建：不要传 ticket（此处没定义 ticket）
-      return <TicketForm customer={customer} />;
+        return (<TicketForm customer={customer} techs={techs} />);
+      } else {
+        return (<TicketForm customer={customer} />);
+      }
     }
+
 
     // Edit ticket form
     if (ticketId) {
@@ -64,20 +82,15 @@ export default async function TicketFormPage({
       }
 
       const customer = await getCustomer(ticket.customerId);
+      if (!isManager) {
+        kindeInit()
+        const { users }= await Users.getUsers()
+        const techs = users ? users.map(user => ({ id: user.id, email!: user.email, description: user.email! })) : []
 
-      if (!customer) {
-        return (
-          <>
-            <h2 className="text-2xl mb-2">
-              Customer for Ticket #{ticketId} not found
-            </h2>
-            <BackButton title="Go Back" variant="default" />
-          </>
-        );
+        return (<TicketForm customer={customer} ticket={ticket} techs={techs} />);
+      } else {
+        return (<TicketForm customer={customer} ticket={ticket}/>);
       }
-
-      // ✅ 编辑：这里 ticket 已定义，可以传
-      return <TicketForm customer={customer} ticket={ticket} />;
     }
   } catch (e) {
     if (e instanceof Error) throw e;

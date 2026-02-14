@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import { InputWithLabel } from "@/components/inputs/InputWithLabel";
 import { insertCustomerSchema,type insertCustomerSchemaType, selectCustomerSchemaType } from "@/zod-schemas/customer";
-import { Phone } from "lucide-react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { TextAreaWithLabel } from "@/components/inputs/TextAreaWithLabel";
 import { SelectWithLabel } from "@/components/inputs/SelectWithLabel";
 import { StatesArray } from "@/constants/StatesArray";
@@ -18,30 +18,24 @@ type Props = {
 };
 
 export function CustomerForm({ customer }: Props) { 
-    const defaultValues: insertCustomerSchemaType = customer ? {
-        id: customer.id ?? 0,
-        firstName: customer.firstName ?? "",
-        lastName: customer.lastName ?? "",
-        address1: customer.address1 ?? "",
-        address2: customer.address2 ?? "",
-        city: customer.city ?? "",
+    const { getPermissions,getPermissions, isLoading } = useKindeBrowserClient()
+    const isManager = !isLoading && getPermissions('manager')?.isGranted
+    const permObj = getPermissions()
+    const isAuthorized = !isLoading && permObj.permissions.some(perm => perm === 'manager' || perm === 'employee')
+
+    }
+    const defaultValues: insertCustomerSchemaType = {
+        id: customer?.id ?? 0,
+        firstName: customer?.firstName ?? "",
+        lastName: customer?.lastName ?? "",
+        address1: customer?.address1 ?? "",   
+        address2: customer?.address2 ?? "",
+        city: customer?.city ?? "",
         state: customer.state ?? "",
-        zip: customer.zip ?? "",
-        phone: customer.phone ?? "",
-        email: customer.email ?? "",
-        notes: customer.notes ?? "",
-    } : {
-        id: 0,
-        firstName: "",
-        lastName: "",
-        address1: "",
-        address2: "",
-        city: "",
-        state: "",
-        zip: "",
-        phone: "",
-        email: "",
-        notes: "",
+        zip: customer?.zip ?? "",
+        phone: customer?.phone ?? "",
+        email: customer?.email ?? "",
+        notes: customer?.notes ?? "",
     }
 
     const form = useForm<insertCustomerSchemaType>({
@@ -58,7 +52,7 @@ export function CustomerForm({ customer }: Props) {
         <div className="flex flex-col gap-1 sm:px-8">
             <div>
                 <h2 className="text-2xl font-bold">
-                    {customer?.id ? "Edit" : "New"}Customer Form
+                    {customer?.id ? "Edit" : "New"}Customer {customerId?.id ? `#${customerId.id}` : "Form"}
                 </h2>
             </div>
             <Form {...form}> 
