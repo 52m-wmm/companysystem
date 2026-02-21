@@ -8,8 +8,15 @@ import { InputWithLabel } from "@/components/inputs/InputWithLabel";
 import { insertCustomerSchema,type insertCustomerSchemaType, selectCustomerSchemaType } from "@/zod-schemas/customer";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { TextAreaWithLabel } from "@/components/inputs/TextAreaWithLabel";
+import { CheckboxWithLabel } from "@/components/inputs/CheckboxWithLabel";
 import { SelectWithLabel } from "@/components/inputs/SelectWithLabel";
 import { StatesArray } from "@/constants/StatesArray";
+
+import { useAction } from 'next-safe-action/hooks';
+import { saveCustomerAction } from "@/app/actions/saveCustomerAction";
+import { toast } from "sonner";
+import  { LoaderCircle } from "lucide-react";
+import  DisplayServerActionResponse  from "@/components/ui/DisplayServerActionResponse";
 
 
 
@@ -18,12 +25,12 @@ type Props = {
 };
 
 export function CustomerForm({ customer }: Props) { 
-    const { getPermissions,getPermissions, isLoading } = useKindeBrowserClient()
-    const isManager = !isLoading && getPermissions('manager')?.isGranted
+    const { getPermission,getPermissions, isLoading } = useKindeBrowserClient()
+    const isManager = !isLoading && getPermission('manager')?.isGranted
     const permObj = getPermissions()
     const isAuthorized = !isLoading && permObj.permissions.some(perm => perm === 'manager' || perm === 'employee')
 
-    }
+    
     const defaultValues: insertCustomerSchemaType = {
         id: customer?.id ?? 0,
         firstName: customer?.firstName ?? "",
@@ -31,11 +38,12 @@ export function CustomerForm({ customer }: Props) {
         address1: customer?.address1 ?? "",   
         address2: customer?.address2 ?? "",
         city: customer?.city ?? "",
-        state: customer.state ?? "",
+        state: customer?.state ?? "",
         zip: customer?.zip ?? "",
         phone: customer?.phone ?? "",
         email: customer?.email ?? "",
         notes: customer?.notes ?? "",
+        active: customer?.active ?? true,
     }
 
     const form = useForm<insertCustomerSchemaType>({
@@ -43,21 +51,37 @@ export function CustomerForm({ customer }: Props) {
         resolver: zodResolver(insertCustomerSchema),
         defaultValues,
     })
+    const {
+        execute: executeSave,
+        result: saveResult,
+        isExecuting: isSaving,
+        reset: resetSaveAction,
+    } = useAction(saveCustomerAction, {
+        onSuccess({ data }) {
+            toast.success("Success! " + data?.message);
+        },
+        onError({ error }) {
+            toast.error("Save failed ");
+        },
+
+    })
 
     async function submitForm(data: insertCustomerSchemaType) {
-        console.log(data)
+        //console.log(data)
+        executeSave(data)
     }
 
     return (
         <div className="flex flex-col gap-1 sm:px-8">
+            <DisplayServerActionResponse result={saveResult} />
             <div>
                 <h2 className="text-2xl font-bold">
-                    {customer?.id ? "Edit" : "New"}Customer {customerId?.id ? `#${customerId.id}` : "Form"}
+                    {customer?.id ? "Edit" : "New"}Customer {customer?.id ? `#${customer.id}` : "Form"}
                 </h2>
             </div>
             <Form {...form}> 
                 <form onSubmit={form.handleSubmit(submitForm)} 
-                className="flex flex-col md:flex-row gap-4 md:gap-8"> 
+                className="flex flex-col md:flex-row gap-4 md:gap-8">      
                 <div className="flex flex-col gap-4 w-full max-w-xs">
                     <InputWithLabel<insertCustomerSchemaType>
                         fieldTitle="First Name"
@@ -105,12 +129,28 @@ export function CustomerForm({ customer }: Props) {
                         nameInSchema="notes"
                         className="h-40"
                     />
+                    {isLoading ? <p>Loading...</p> : isManager && customer?.id ? (
+                    <CheckboxWithLabel<insertCustomerSchemaType>
+                        fieldTitle="Active"
+                        nameInSchema="active"
+                        message="Yes"
+                    />) : null}
                     <div className="flex gap-2">
-                        <Button type="submit" className="w-3/4" variant="default" title="Save">
-                            Save
+                        <Button type="submit" className="w-3/4" variant="default" title="Save"
+                        disabled={isSaving}>
+
+                            {isSaving ? (
+                                <>
+                                <LoaderCircle className="animate-spin" /> Saving
+                                </>
+                            ) : "Save"}
                         </Button>
+
                         <Button type="button" variant="destructive" title="Reset" 
-                        onClick={() => form.reset(defaultValues)} className="w-3/4">
+                        onClick={() => {
+                            form.reset(defaultValues)
+                            resetSaveAction()
+                        }} className="w-3/4">
                             Reset
                         </Button>
                     </div>

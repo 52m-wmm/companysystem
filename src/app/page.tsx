@@ -5,7 +5,7 @@ export default function Home() {
     <div className="min-h-dvh bg-white">
       <main className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto min-h-dvh">
         <div className="flex flex-col gap-6 p-12 rounded-xl bg-black/90 w-4/5 sm:max-w-2xl mx-auto text-white shadow-lg">
-          <h1 className="text-2xl font-bold">Welcome to 52m Company System</h1>
+          <h1 className="text-2xl font-bold">Welcome to 52m Ticket System</h1>
 
           <address className="italic">
             555 Gateway Lane<br />

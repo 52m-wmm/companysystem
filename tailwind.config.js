@@ -25,8 +25,8 @@ module.exports = {
         } 
       },
       animation: {
-        appear: "appear 1s ease-in-out",
-        slide: "slide 750ms ease-in-out",
+        appear: "appear 1s ease-in-out forwards",
+        slide: "slide 750ms ease-in-out forwards",
 
       },
     }
