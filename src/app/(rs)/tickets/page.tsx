@@ -1,9 +1,36 @@
-import React from 'react'
+import TicketSearch from '@/app/(rs)/tickets/TicketSearch'
+import { getOpenTickets } from '@/lib/queries/getOpenTickets'
+import { getTicketSearchResults } from '@/lib/queries/getTicketSearchResults'
 
-const Tickets = () => {
-  return (
-    <div>Tickets</div>
-  )
+
+export const metadata = {
+    title: "Ticket Search",
 }
+export default async function Tickets({ 
+    searchParams,
+}: {
+    searchParams: Promise<{ [key: string]: string | undefined }>
+})  {
+    const { searchText } = await searchParams
 
-export default Tickets
+    if (!searchText) {
+      // query default results
+      const results = await getOpenTickets()
+      return (
+      <>
+        <TicketSearch />
+        <p>{JSON.stringify("placeholder")}</p>
+      </>
+      )
+    }
+    // query search results
+    const results = await getTicketSearchResults(searchText)
+    // return search results
+    return (
+      <>
+      <TicketSearch />
+      <p>{JSON.stringify(results)}</p>
+      </>
+    )
+  }
+  

@@ -1,9 +1,10 @@
-import { HomeIcon, File, UsersRound, User, LogOut } from 'lucide-react'
+import { HomeIcon, File, UsersRound, LogOut} from 'lucide-react'
 import Link from 'next/link'
 import { NavButton } from './Navbutton'
 import { ModeToggle } from './Modetoggle'
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { Button } from './ui/button'
+import { NavButtonMenu } from './NavButtonMenu'
 
 
 export function Header() {
@@ -13,18 +14,32 @@ export function Header() {
       <div className="flex h-8 items-center justify-between w-full">
 
         <div className="flex items-center gap-2">
-            <NavButton href="./home" label="Home" icon={HomeIcon} />
+            <NavButton href="/home" label="Home" icon={HomeIcon} />
             <Link href="/home" className="flex justify-center items-center gap-2 ml-0"
             title="Home">
                 <h1 className="hidden sm:block text-xl font-bold m-0 mt-1">
-                    52m Customer management system
+                    52m Customer order management system
                 </h1>
              </Link>
         </div>
 
         <div className="flex items-center">
-             <NavButton href="./tickets" label="Tickets" icon={File} />
-              <NavButton href="./customers" label="Customers" icon={UsersRound} />
+             <NavButton href="/tickets" label="Tickets" icon={File} />
+             <NavButtonMenu
+             icon={UsersRound}
+             Label="Customer Menu"
+             chioce={[
+                {
+                  title: "Search Customer",
+                  href: "/customers"
+                },
+                {
+                  title: "New Customer",
+                  href: "/customers/form"
+                }
+             ]}
+             />
+              
               <ModeToggle />
               <Button 
               variant="ghost"
