@@ -3,7 +3,6 @@
 import type { selectCustomerSchemaType } from "@/zod-schemas/customer";
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 type Props = {
