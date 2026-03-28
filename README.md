@@ -92,16 +92,6 @@ Company System 是一个基于表单驱动的数据采集与管理系统，用�
 
 ---
 
-## 🔄 Workflow | 系统流程
-
-1. User fills in form  
-2. Frontend validates data  
-3. Backend processes and normalizes data  
-4. Data stored in PostgreSQL  
-5. Display via table view  
-
----
-
 ## 🚧 Future Improvements | 后续优化
 
 - Dynamic form builder（动态表单生成）
