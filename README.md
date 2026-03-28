@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏢 Company System — Business Management Platform
 
-## Getting Started
+## 🚀 Overview | 项目简介
 
-First, run the development server:
+**EN**  
+Company System is a full-stack business management platform designed to handle customer, company, and operational data.  
+It demonstrates real-world backend + database + frontend integration for internal tools.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**CN**  
+Company System 是一个企业管理系统，用于管理客户、公司及业务数据，展示全栈开发在实际业务系统中的落地能力。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Problem | 解决的问题
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**EN**
+- Business data scattered across spreadsheets  
+- No centralized system for managing customers and companies  
+- Lack of efficient data querying and visualization  
 
-## Learn More
+**CN**
+- 业务数据分散在 Excel 中  
+- 缺乏统一的客户/公司管理系统  
+- 查询与管理效率低  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💡 Solution | 解决方案
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**EN**
+- Centralized data management system  
+- Structured database design  
+- Real-time data query & table visualization  
+- CRUD operations for business workflows  
 
-## Deploy on Vercel
+**CN**
+- 集中式数据管理系统  
+- 结构化数据库设计  
+- 实时数据查询与表格展示  
+- 支持完整业务 CRUD 操作  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧠 Core Features | 核心功能
+
+- 📊 Customer / Company Management（客户/公司管理）
+- 🔍 Advanced Table Query（数据查询）
+- ✏️ CRUD Operations（增删改查）
+- 📁 Structured Data Storage（结构化数据存储）
+- 📈 Data Visualization Ready（可扩展分析）
+
+---
+
+## 🏗️ Tech Stack | 技术架构
+
+**Frontend**
+- React
+- TanStack Table
+- TailwindCSS
+
+**Backend**
+- Node.js
+- TypeScript
+
+**Database**
+- PostgreSQL (Neon)
+
+**ORM**
+- Drizzle ORM
+
+**Validation**
+- Zod
+
+---
+
+## ⚙️ System Design | 系统设计
+
+**EN**
+- Clear separation between frontend, backend, and database layers  
+- API-driven architecture  
+- Typed data validation using Zod  
+- Efficient data querying using SQL + ORM  
+
+**CN**
+- 前后端 + 数据库分层架构  
+- 基于 API 的系统设计  
+- 使用 Zod 进行类型校验  
+- SQL + ORM 提升查询效率  
+
+---
+
+## 📂 Project Structure | 项目结构
+/frontend → 前端页面
+/backend → API服务
+/db → 数据库模型
+/lib → 公共逻辑
+
+
+---
+
+## 🔄 Workflow | 系统流程
+
+1. User interacts with UI  
+2. Frontend sends API request  
+3. Backend processes business logic  
+4. Database query/update  
+5. Return structured response  
+
+---
+
+## 🚧 Future Improvements | 后续优化
+
+- Role-based permission system（权限管理）
+- Data analytics dashboard（数据分析）
+- API performance optimization（性能优化）
+- ETL pipeline integration（数据管道）
