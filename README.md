@@ -102,15 +102,6 @@ Company System 是一个基于表单驱动的数据采集与管理系统，用�
 
 ---
 
-## 📂 Project Structure | 项目结构
-/frontend → 表单与展示
-/backend → API服务
-/db → 数据模型
-/lib → 公共逻辑
-
-
----
-
 ## 🚧 Future Improvements | 后续优化
 
 - Dynamic form builder（动态表单生成）
