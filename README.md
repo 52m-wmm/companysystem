@@ -1,53 +1,56 @@
-# 🏢 Company System — Business Management Platform
+# 📝 Company System — Data Collection & Management Platform
 
 ## 🚀 Overview | 项目简介
 
 **EN**  
-Company System is a full-stack business management platform designed to handle customer, company, and operational data.  
-It demonstrates real-world backend + database + frontend integration for internal tools.
+Company System is a form-driven data collection and management platform designed to handle structured business data such as customers and companies.
+
+It demonstrates how to build a scalable internal system for data entry, validation, and querying.
 
 **CN**  
-Company System 是一个企业管理系统，用于管理客户、公司及业务数据，展示全栈开发在实际业务系统中的落地能力。
+Company System 是一个基于表单驱动的数据采集与管理系统，用于处理客户、公司等结构化业务数据。
+
+该项目展示了如何构建一个可扩展的企业内部系统，用于数据录入、校验和查询。
 
 ---
 
 ## 🎯 Problem | 解决的问题
 
 **EN**
-- Business data scattered across spreadsheets  
-- No centralized system for managing customers and companies  
-- Lack of efficient data querying and visualization  
+- Business data is collected manually with low efficiency  
+- Data formats are inconsistent  
+- Difficult to query and maintain  
 
 **CN**
-- 业务数据分散在 Excel 中  
-- 缺乏统一的客户/公司管理系统  
-- 查询与管理效率低  
+- 数据采集依赖人工，效率低  
+- 数据格式不统一  
+- 查询与维护困难  
 
 ---
 
 ## 💡 Solution | 解决方案
 
 **EN**
-- Centralized data management system  
-- Structured database design  
-- Real-time data query & table visualization  
-- CRUD operations for business workflows  
+- Structured form-based data input  
+- Data validation and normalization  
+- Centralized storage and querying  
+- Table-based data visualization  
 
 **CN**
-- 集中式数据管理系统  
-- 结构化数据库设计  
-- 实时数据查询与表格展示  
-- 支持完整业务 CRUD 操作  
+- 表单化数据录入  
+- 数据校验与标准化  
+- 集中存储与查询  
+- 表格化展示  
 
 ---
 
 ## 🧠 Core Features | 核心功能
 
-- 📊 Customer / Company Management（客户/公司管理）
-- 🔍 Advanced Table Query（数据查询）
+- 📝 Dynamic Form Input（表单录入）
+- ✅ Data Validation（数据校验）
+- 📊 Table View（数据展示）
+- 🔍 Query & Filtering（查询与筛选）
 - ✏️ CRUD Operations（增删改查）
-- 📁 Structured Data Storage（结构化数据存储）
-- 📈 Data Visualization Ready（可扩展分析）
 
 ---
 
@@ -76,41 +79,41 @@ Company System 是一个企业管理系统，用于管理客户、公司及业�
 ## ⚙️ System Design | 系统设计
 
 **EN**
-- Clear separation between frontend, backend, and database layers  
-- API-driven architecture  
-- Typed data validation using Zod  
-- Efficient data querying using SQL + ORM  
+- Form-driven architecture for structured data input  
+- Strong validation layer using Zod  
+- Clean separation between UI, API, and database  
+- Efficient querying using SQL + ORM  
 
 **CN**
-- 前后端 + 数据库分层架构  
-- 基于 API 的系统设计  
-- 使用 Zod 进行类型校验  
-- SQL + ORM 提升查询效率  
-
----
-
-## 📂 Project Structure | 项目结构
-/frontend → 前端页面
-/backend → API服务
-/db → 数据库模型
-/lib → 公共逻辑
-
+- 基于表单驱动的数据录入架构  
+- 使用 Zod 进行强校验  
+- 前后端 + 数据库分层  
+- SQL + ORM 实现高效查询  
 
 ---
 
 ## 🔄 Workflow | 系统流程
 
-1. User interacts with UI  
-2. Frontend sends API request  
-3. Backend processes business logic  
-4. Database query/update  
-5. Return structured response  
+1. User fills in form  
+2. Frontend validates data  
+3. Backend processes and normalizes data  
+4. Data stored in PostgreSQL  
+5. Display via table view  
+
+---
+
+## 📂 Project Structure | 项目结构
+/frontend → 表单与展示
+/backend → API服务
+/db → 数据模型
+/lib → 公共逻辑
+
 
 ---
 
 ## 🚧 Future Improvements | 后续优化
 
-- Role-based permission system（权限管理）
-- Data analytics dashboard（数据分析）
-- API performance optimization（性能优化）
+- Dynamic form builder（动态表单生成）
+- Role-based access control（权限管理）
 - ETL pipeline integration（数据管道）
+- Data analytics dashboard（数据分析）
